@@ -32,7 +32,7 @@ public class MainController {
 
     @GetMapping("/main")
     public String main(@RequestParam(required = false, defaultValue = "") String filter, Model model){
-        Iterable<Message> messages = messageRepo.findAll();
+        Iterable<Message> messages;
 
         if(filter != null && !filter.isEmpty()) {
             messages = messageRepo.findByTag(filter);
@@ -74,6 +74,8 @@ public class MainController {
 
         Iterable<Message> messages = messageRepo.findAll();
         model.addAttribute("messages", messages);
+
+        model.addAttribute("user", user);
 
         return "main";
     }
