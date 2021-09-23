@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+<p>User editor</p>
+<form th:action="@{/user}" method="post">
+    <div th:each="role : ${roles}">
+        <p th:text="${role}"></p>
+        <input type="checkbox" th:name="${role}" th:checked="${user.isRoleExited(role)}">
+    </div>
+  <input type="text" th:name="userName" th:value="${user.getUserName()}">
+  <input type="hidden" th:value="${user.getId()}" name="userId">
+  <button type="submit">Save</button>
+</form>
+</body>
+</html>

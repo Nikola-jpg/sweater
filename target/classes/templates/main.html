@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" >
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+<form th:action="@{/logout}" method="post">
+    <input type="submit" value="Sign Out"/>
+</form>
+
+<span><a th:href="@{/user}">User list</a> </span>
+
+<h1>Form</h1>
+<form th:action="@{/main}" method="post" enctype="multipart/form-data">
+    <p>Text: <input type="text" name="text" /></p>
+    <p>Tag: <input type="text" name="tag" /></p>
+    <p>File: <input type="file"  name="file"/></p>
+    <p><input type="submit" value="Add" /></p>
+</form>
+
+<form method="get" th:action="@{/main}">
+        <input type="text" name="filter" th:value="${filter}">
+    <button type="submit">Find</button>
+</form>
+
+<table>
+    <thead>
+    <tr>
+        <th> Id </th>
+        <th> Text </th>
+        <th> Tag </th>
+    </tr>
+    </thead>
+    <tbody>
+    <h1>Form</h1>
+
+    <tr th:if="${messages.empty}">
+        <td colspan="3"> No messages available </td>
+    </tr>
+    <tr th:each="message : ${messages}">
+        <td><span th:text="${message.getId()}"> Text </span></td>
+        <td><span th:text="${message.getText()}"> Text </span></td>
+        <td><span th:text="${message.getTag()}"> Tag </span></td>
+        <td><span th:text="${message.getAuthorName()}"> Tag </span></td>
+        <td th:if="${message.getFileName()}"><img th:src="@{/img/{fileName}(fileName=${message.getFileName()})}"></td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>

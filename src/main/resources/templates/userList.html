@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" >
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+<p>List of user</p>
+<table>
+    <thead>
+    <tr>
+        <th> name </th>
+        <th> role </th>
+        <th>  </th>
+    </tr>
+    </thead>
+    <tbody>
+    <h1>Form</h1>
+
+    <tr th:if="${users.empty}">
+        <td colspan="3"> No messages available </td>
+    </tr>
+    <tr th:each="user : ${users}">
+        <td><span th:text="${user.getUserName()}"> Text </span></td>
+        <td><span th:each="role : ${user.getRoles()}" th:text="${role} + ', '" > Text </span></td>
+        <td><a th:href="@{/user/{id}(id=${user.getId()})}">edit</a> </td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>
