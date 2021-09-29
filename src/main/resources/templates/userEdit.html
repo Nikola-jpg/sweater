@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>User edit</title>
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+<ul class="navbar">
+  <li><a href="#">Home</a></li>
+  <li><a href="/main">Message</a></li>
+  <li><a class="active" href="/user">User list</a></li>
+  <li style="float:right"><a href="/user/profile">Profile</a></li>
+</ul>
+
+<form th:action="@{/user}" method="post">
+  <input type="hidden" th:value="${user.id}" name="userId">
+  <input type="text" name="userName" th:value="${user.userName}"/>
+  <div th:each="role : ${roles}">
+  <input type="checkbox" th:name="${role}" th:checked="${user.isRoleExited(role)}" th:text="${role}"/>
+  </div>
+  <input type="submit" value="Submit" /> <input type="reset" value="Reset" />
+</form>
+</body>
+</html>

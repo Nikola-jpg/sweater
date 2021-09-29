@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+<ul class="navbar">
+    <li><a href="/">Home</a></li>
+    <li><a class="active" href="/main">Message</a></li>
+    <li><a href="/user">User list</a></li>
+    <li style="float:right"><a href="/user/profile">Profile</a></li>
+</ul>
+
+<form th:action="@{/logout}" method="post">
+    <input type="submit" value="Sign Out"/>
+</form>
+
+<form th:action="@{/main}" method="post" enctype="multipart/form-data">
+    <p><input type="text" name="text" placeholder="Text"/></p>
+    <p><input type="text" name="tag" placeholder="Tag"/></p>
+    <input type="file" name="file" placeholder="File">
+    <p><input type="submit" value="Submit" /> <input type="reset" value="Reset" /></p>
+</form>
+<br>
+<div>Messages</div>
+<form th:action="@{/main}" method="get">
+    <p><input type="text" name="filter" th:value="${filter}" placeholder="Filter"/></p>
+    <p><input type="submit" value="Submit" /> <input type="reset" value="Reset" /></p>
+</form>
+
+<table>
+    <thead>
+    <tr>
+        <th> Text </th>
+        <th> Tag </th>
+        <th> Author </th>
+        <th> Img </th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:if="${messages.empty}">
+        <td colspan="4"> No Books Available </td>
+    </tr>
+    <tr th:each="message : ${messages}">
+        <td><span th:text="${message.text}"> Text </span></td>
+        <td><span th:text="${message.tag}"> Tag </span> </td>
+        <td><span th:text="${message.authorName}"> Author </span></td>
+       <div>
+           <td th:if="${message.fileName}"><img th:src="@{/img/{fileName}(fileName=${message.fileName})}"></td>
+       </div>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>
