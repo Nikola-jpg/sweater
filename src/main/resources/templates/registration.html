@@ -3,6 +3,7 @@
 <head>
     <title>Spring Security Example </title>
     <link rel="stylesheet" href="/static/style.css">
+    <script src="https://www.google.com/recaptcha/api.js"></script>
 </head>
 <body>
 Add new user
@@ -16,6 +17,9 @@ Add new user
     <div style="color:red" th:if="${#fields.hasErrors('password')}" th:errors="*{password}">Password Error</div>
     <input type="email" th:field="*{email}" placeholder="Email"/>
     <div style="color:red" th:if="${#fields.hasErrors('email')}" th:errors="*{email}">Email Error</div>
+    <div>
+        <div class="g-recaptcha" data-sitekey="6LdDFqocAAAAAFvVCJSb9FVSJx-I_pxOUOwguNPh"></div>
+    </div>
     <div><input type="submit" value="Sign In"/></div>
 </form>
 </body>
