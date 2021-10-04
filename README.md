@@ -1,3 +1,2 @@
 # sweater
-Branch 'main' is deprecated
-Branch 'master' is actual
+Branch 'main' is deprecated and branch 'master' is actual
