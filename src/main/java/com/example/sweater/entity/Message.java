@@ -1,6 +1,10 @@
 package com.example.sweater.entity;
 
+import net.bytebuddy.implementation.bind.annotation.Empty;
+import org.hibernate.validator.constraints.Length;
+
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 
 @Entity
 public class Message {
@@ -8,6 +12,8 @@ public class Message {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
+    @NotBlank(message = "Please fill the message")
+    @Length(max = 2048, message = "Message too long (more then 2kb)")
     private String text;
     private String tag;
 

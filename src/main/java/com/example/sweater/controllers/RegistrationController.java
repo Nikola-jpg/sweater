@@ -5,10 +5,10 @@ import com.example.sweater.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
 
 @Controller
 public class RegistrationController {
@@ -16,14 +16,16 @@ public class RegistrationController {
     private UserService userService;
 
     @GetMapping("/registration")
-    public String registration(){
+    public String registration(@ModelAttribute("user") User user){
 
         return "registration";
     }
 
     @PostMapping("/registration")
-    public String addUser(@RequestParam String userName, @RequestParam String password, Model model){
-        User user = new User(userName, password);
+    public String addUser(@Valid User user, BindingResult bindingResult, Model model){
+        if(bindingResult.hasErrors()){
+            return "registration";
+        }
 
         if(!userService.addUser(user)){
             model.addAttribute("message", "User exists!");

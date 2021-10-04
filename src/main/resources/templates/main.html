@@ -17,13 +17,20 @@
     <input type="submit" value="Sign Out"/>
 </form>
 
-<form th:action="@{/main}" method="post" enctype="multipart/form-data">
-    <p><input type="text" name="text" placeholder="Text"/></p>
-    <p><input type="text" name="tag" placeholder="Tag"/></p>
-    <input type="file" name="file" placeholder="File">
-    <p><input type="submit" value="Submit" /> <input type="reset" value="Reset" /></p>
+<form th:method="POST" th:action="@{/main}" th:object="${message}" enctype="multipart/form-data">
+    <input type="text" th:field="*{text}" placeholder="Text"/>
+    <div style="color:red" th:if="${#fields.hasErrors('text')}" th:errors="*{text}">Text Error</div>
+    <br/>
+    <input type="text" th:field="*{tag}" placeholder="Tag"/>
+    <div style="color:red" th:if="${#fields.hasErrors('tag')}" th:errors="*{tag}">Age Error</div>
+    <br/>
+    <input type="file" th:name="file" placeholder="File"/>
+    <br/>
+    <input type="submit" value="Create!"/> <input type="reset" value="Reset">
 </form>
+
 <br>
+
 <div>Messages</div>
 <form th:action="@{/main}" method="get">
     <p><input type="text" name="filter" th:value="${filter}" placeholder="Filter"/></p>
