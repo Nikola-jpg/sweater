@@ -1,6 +1,5 @@
 package com.example.sweater.entity;
 
-import net.bytebuddy.implementation.bind.annotation.Empty;
 import org.hibernate.validator.constraints.Length;
 
 import javax.persistence.*;

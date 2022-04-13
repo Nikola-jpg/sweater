@@ -3,7 +3,6 @@
 <head>
     <title>Spring Security Example </title>
     <link rel="stylesheet" href="/static/style.css">
-    <script src="https://www.google.com/recaptcha/api.js"></script>
 </head>
 <body>
 Login page
@@ -11,11 +10,8 @@ Login page
 <p th:text="${message}"></p>
 
 <form th:action="@{/login}" method="post">
-    <div><label> User Name : <input type="text" name="username"/> </label></div>
+    <div><label> User Name : <input type="text" name="userName"/> </label></div>
     <div><label> Password: <input type="password" name="password"/> </label></div>
-    <div>
-        <div class="g-recaptcha" data-sitekey="6LdDFqocAAAAAFvVCJSb9FVSJx-I_pxOUOwguNPh"></div>
-    </div>
     <div><input type="submit" value="Sign In"/></div>
 </form>
 

@@ -16,7 +16,7 @@ import java.util.Collections;
 
 @Controller
 public class RegistrationController {
-    private final static String CAPTCHA_URL = "https://www.google.com/recaptcha/api/siteverify?secret=%s&response";
+    private final static String CAPTCHA_URL = "https://www.google.com/recaptcha/api/siteverify?secret=%s&response=%s";
     @Autowired
     private UserService userService;
 
@@ -38,15 +38,13 @@ public class RegistrationController {
                           BindingResult bindingResult,
                           Model model
     ){
-        System.out.println(captchaResponse);
-
         String url = String.format(CAPTCHA_URL, secret, captchaResponse);
         CaptchaResponseDto response = restTemplate.postForObject(url, Collections.emptyList(), CaptchaResponseDto.class);
 
         if(!response.isSuccess()){
             model.addAttribute("captchaError", "Fill captcha");
         }
-        if(bindingResult.hasErrors() || !response.isSuccess()){
+        if(bindingResult.hasErrors()){
             return "registration";
         }
 
